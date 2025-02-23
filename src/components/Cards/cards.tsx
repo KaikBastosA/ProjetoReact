@@ -58,6 +58,7 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
     }
 
     return (
+        // Card Pre-definido
         <section className={styles.card}>
             <div className={styles.header}>
                 <div className={styles.user}>
@@ -75,7 +76,6 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
                     <p key={index}>{paragraph}</p>
                 ))}
             </div>
-
             <div className={styles.commentSection}>
                 <h3>Deixe seu feedback</h3>
                 <textarea
@@ -93,10 +93,13 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
                         <div className={styles.commentHeader}>
                             <h4>Comentador</h4>
                             <p>Comentado há {formatTime(comment.time)}</p>
-                            <button onClick={() => handleDelete(comment.id)}>Apagar</button>
+                            <span className="material-symbols-outlined" onClick={() => handleDelete(comment.id)}>delete</span>
                         </div>
                         <p>{comment.text}</p>
-                        <button onClick={() => handleLike(comment.id)}>Curtir ({comment.likes})</button>
+                        <button onClick={() => handleLike(comment.id)}>
+                            <span className="material-symbols-outlined">thumb_up</span> 
+                            Like • ({comment.likes})
+                        </button>
                     </div>
                 </div>
             ))}

@@ -77,6 +77,15 @@
     height: 7rem;
     border-radius: 0.5rem;
     padding: 0.5rem;
+    outline: none;
+    resize: none;
+    overflow-y: auto;
+    max-height: 15rem;
+    font-size: 1rem;
+}
+
+.commentSection textarea:focus{
+    border: 3px solid #036FDB;
 }
 
 .commentSection button {
@@ -92,7 +101,39 @@
     font-weight: 700;
 }
 
+.comment {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    height: auto;
+}
 
+.commentPfp {
+    width: 62px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.commentContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+    background-color: #1C1C2F;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.commentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
 
 
 
