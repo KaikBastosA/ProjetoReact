@@ -1,9 +1,13 @@
 import styles from './style.module.css'
 import Photo from '../../assets/fotoEu.jpg'
 
-export default function perfil() {
+interface ProfileProps {
+    className?: string;
+}
+
+export default function Profile({ className }: ProfileProps) {
     return (
-        <div className={styles.profile}>
+        <div className={`${styles.profile} ${className}`}>
             <img className={styles.photo} src={Photo} alt="Foto de perfil" />
             <div className={styles.info}>
                 <h1>Kaik Bastos</h1>

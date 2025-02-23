@@ -4,12 +4,12 @@
     align-items: center;
     justify-content: flex-end;
     align-content: center;
-    width: 22.25rem;
+    width: 30%;
     height: 28.75rem;
     gap: 2rem;
     background-color: #0E0E1B;
-    margin: 20px auto;
-    padding: 0 0 3rem 0;
+    padding: 0 0 4rem 0;
+    margin: 0 auto;
     border-radius: 20px;
     background: url('../../assets/4k-minimalist-forest-lake-d5drpc47ack3smif.jpg');
     background-size: cover;
@@ -29,6 +29,7 @@
 .photo {
     width: 8rem;
     height: 8rem;
+    object-fit: cover;
     border: 0.4rem solid #004B96;
     border-radius: 50%;
     z-index: 1;
