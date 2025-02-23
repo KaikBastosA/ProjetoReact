@@ -1,0 +1,8 @@
+.card {
+    background-color: #0E0E1B;
+    border-radius: 0.5rem;
+    color: white;
+    font-family: Inter, Arial, sans-serif;
+    width: 75%;
+    margin: 0 auto;
+}
