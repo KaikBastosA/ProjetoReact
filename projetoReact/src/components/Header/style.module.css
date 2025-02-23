@@ -1,0 +1,27 @@
+.cabecalho {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: auto;
+    gap: 2rem;
+    background-color: #0E0E1B;
+}
+
+.logo img {
+    height: 50px;
+    display: block;
+}
+
+.cabecalho h1 {
+    font-family: Barlow;
+    font-size: 4rem;
+    font-weight: 500;
+    color: #036FDB;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    text-align: center;
+}
