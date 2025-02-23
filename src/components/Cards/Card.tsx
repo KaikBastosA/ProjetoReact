@@ -8,6 +8,8 @@ interface CardProps {
     role: string;
     initialTime: number;
     text: string[];
+    initialComments?: Comment[];
+    className?: string; // Adiciona a prop className
 }
 
 interface Comment {
@@ -15,12 +17,14 @@ interface Comment {
     text: string;
     time: number;
     likes: number;
+    pfp: string;
+    name: string;
 }
 
-export default function Card({ pfp, name, role, initialTime, text }: CardProps) {
+export default function Card({ pfp, name, role, initialTime, text, initialComments = [], className }: CardProps) {
     const [time, setTime] = useState(initialTime);
     const [commentText, setCommentText] = useState('');
-    const [comments, setComments] = useState<Comment[]>([]);
+    const [comments, setComments] = useState<Comment[]>(initialComments);
     const [likedComments, setLikedComments] = useState<Set<number>>(new Set());
 
     useEffect(() => {
@@ -46,7 +50,9 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
             id: Date.now(),
             text: commentText,
             time: 0,
-            likes: 0
+            likes: 0,
+            pfp: DefaultPhoto,
+            name: "Kaik Bastos"
         };
         setComments([...comments, newComment]);
         setCommentText('');
@@ -80,7 +86,7 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
     };
 
     return (
-        <section className={styles.card}>
+        <section className={`${styles.card} ${className}`}>
             <div className={styles.header}>
                 <div className={styles.user}>
                     <img className={styles.pfp} src={pfp} alt={`${name}-feedback`} />
@@ -109,13 +115,12 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
 
             {comments.map(comment => (
                 <div key={comment.id} className={styles.comment}>
-                    <img className={styles.commentPfp} src={DefaultPhoto} alt="Comentário" />
-
+                    <img className={styles.commentPfp} src={comment.pfp} alt="Comentário" />
                     <div className={styles.commentContainer}>
                         <div className={styles.commentContent}>
                             <div className={styles.commentHeader}>
                                 <div className={styles.userComment}>
-                                    <h4>Kaik Bastos</h4>
+                                    <h4>{comment.name}</h4>
                                     <p>Cerca de {formatTime(comment.time)}</p>
                                 </div>
                                 <span
@@ -127,7 +132,6 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
                             </div>
                             <p>{comment.text}</p>
                         </div>
-
                         <button
                             className={`${styles.likeButton} ${likedComments.has(comment.id) ? styles.liked : ''}`}
                             onClick={() => handleLike(comment.id)}
@@ -138,7 +142,6 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
                     </div>
                 </div>
             ))}
-
         </section>
     );
 }
