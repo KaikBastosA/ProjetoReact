@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './style.module.css';
-import DefaultPhoto from '../../assets/fotoEu.jpg'
+import DefaultPhoto from '../../assets/fotoEu.jpg';
 
 interface CardProps {
     pfp: string;
@@ -25,6 +25,10 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
     useEffect(() => {
         const interval = setInterval(() => {
             setTime(time => time + 1);
+            setComments(comments => comments.map(comment => ({
+                ...comment,
+                time: comment.time + 1
+            })));
         }, 60000);
         return () => clearInterval(interval);
     }, []);
@@ -51,14 +55,13 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
         setComments(comments.map(comment =>
             comment.id === id ? { ...comment, likes: comment.likes + 1 } : comment
         ));
-    }
+    };
 
     const handleDelete = (id: number) => {
         setComments(comments.filter(comment => comment.id !== id));
-    }
+    };
 
     return (
-        // Card Pre-definido
         <section className={styles.card}>
             <div className={styles.header}>
                 <div className={styles.user}>
@@ -91,19 +94,20 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
                     <img className={styles.commentPfp} src={DefaultPhoto} alt="Comentário" />
                     <div className={styles.commentContent}>
                         <div className={styles.commentHeader}>
-                            <h4>Comentador</h4>
-                            <p>Comentado há {formatTime(comment.time)}</p>
+                            <div className={styles.userComment}>
+                                <h4>Kaik Bastos</h4>
+                                <p>Cerca de {formatTime(comment.time)}</p>
+                            </div>
                             <span className="material-symbols-outlined" onClick={() => handleDelete(comment.id)}>delete</span>
                         </div>
                         <p>{comment.text}</p>
                         <button onClick={() => handleLike(comment.id)}>
-                            <span className="material-symbols-outlined">thumb_up</span> 
+                            <span className="material-symbols-outlined">thumb_up</span>
                             Like • ({comment.likes})
                         </button>
                     </div>
                 </div>
             ))}
-
         </section>
     );
 }

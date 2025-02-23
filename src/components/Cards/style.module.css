@@ -135,6 +135,11 @@
     margin-bottom: 0.5rem;
 }
 
+.commentHeader .userComment{
+    display: flex;
+    flex-direction: column;
+}
+
 
 
 /* Fim */
