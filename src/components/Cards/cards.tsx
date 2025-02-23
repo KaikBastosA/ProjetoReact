@@ -21,6 +21,7 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
     const [time, setTime] = useState(initialTime);
     const [commentText, setCommentText] = useState('');
     const [comments, setComments] = useState<Comment[]>([]);
+    const [likedComments, setLikedComments] = useState<Set<number>>(new Set());
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -52,13 +53,30 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
     };
 
     const handleLike = (id: number) => {
-        setComments(comments.map(comment =>
-            comment.id === id ? { ...comment, likes: comment.likes + 1 } : comment
-        ));
+        if (likedComments.has(id)) {
+            setComments(comments.map(comment =>
+                comment.id === id ? { ...comment, likes: comment.likes - 1 } : comment
+            ));
+            setLikedComments(likes => {
+                const newLikes = new Set(likes);
+                newLikes.delete(id);
+                return newLikes;
+            });
+        } else {
+            setComments(comments.map(comment =>
+                comment.id === id ? { ...comment, likes: comment.likes + 1 } : comment
+            ));
+            setLikedComments(new Set(likedComments).add(id));
+        }
     };
 
     const handleDelete = (id: number) => {
         setComments(comments.filter(comment => comment.id !== id));
+        setLikedComments(likes => {
+            const newLikes = new Set(likes);
+            newLikes.delete(id);
+            return newLikes;
+        });
     };
 
     return (
@@ -92,22 +110,35 @@ export default function Card({ pfp, name, role, initialTime, text }: CardProps) 
             {comments.map(comment => (
                 <div key={comment.id} className={styles.comment}>
                     <img className={styles.commentPfp} src={DefaultPhoto} alt="Comentário" />
-                    <div className={styles.commentContent}>
-                        <div className={styles.commentHeader}>
-                            <div className={styles.userComment}>
-                                <h4>Kaik Bastos</h4>
-                                <p>Cerca de {formatTime(comment.time)}</p>
+
+                    <div className={styles.commentContainer}>
+                        <div className={styles.commentContent}>
+                            <div className={styles.commentHeader}>
+                                <div className={styles.userComment}>
+                                    <h4>Kaik Bastos</h4>
+                                    <p>Cerca de {formatTime(comment.time)}</p>
+                                </div>
+                                <span
+                                    className={`${styles.deleteIcon} material-symbols-outlined`}
+                                    onClick={() => handleDelete(comment.id)}
+                                >
+                                    delete
+                                </span>
                             </div>
-                            <span className="material-symbols-outlined" onClick={() => handleDelete(comment.id)}>delete</span>
+                            <p>{comment.text}</p>
                         </div>
-                        <p>{comment.text}</p>
-                        <button onClick={() => handleLike(comment.id)}>
+
+                        <button
+                            className={`${styles.likeButton} ${likedComments.has(comment.id) ? styles.liked : ''}`}
+                            onClick={() => handleLike(comment.id)}
+                        >
                             <span className="material-symbols-outlined">thumb_up</span>
-                            Like • ({comment.likes})
+                            Like • {comment.likes}
                         </button>
                     </div>
                 </div>
             ))}
+
         </section>
     );
 }
