@@ -9,7 +9,7 @@ interface CardProps {
     initialTime: number;
     text: string[];
     initialComments?: Comment[];
-    className?: string; // Adiciona a prop className
+    className?: string;
 }
 
 interface Comment {
