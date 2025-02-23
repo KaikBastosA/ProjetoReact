@@ -5,4 +5,95 @@
     font-family: Inter, Arial, sans-serif;
     width: 75%;
     margin: 0 auto;
+    margin: 2rem auto;
 }
+
+/* Estilização do Header */
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.header .user {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.infoUser {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    gap: 5px;
+}
+
+.infoUser h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.infoUser p {
+    font-size: 1;
+    font-weight: 200;
+}
+
+.pfp {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    border: solid 5px #004B96;
+}
+/* Fim */
+
+/* Estilização do Body */
+.body {
+    padding: 3rem 1rem 0rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.body p {
+    font-size: 1rem;
+    font-weight: 300;
+}
+/* Fim */
+
+/* Estilização dos comentários */
+.commentSection {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    padding: 3rem 2rem;
+    gap: 1.5rem;
+}
+
+.commentSection textarea {
+    width: 100%;
+    height: 7rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+.commentSection button {
+    align-self: flex-start;
+    width: 8.75rem;
+    height: 3rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #036FDB;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+
+
+
+
+/* Fim */
